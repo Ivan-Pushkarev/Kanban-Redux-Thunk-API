@@ -23,7 +23,7 @@ function CreateTaskForm(props) {
             priority: taskPriority,
             status: taskStatus
         };
-        props.addNewTask(newTask);
+        props.createCard(newTask);
         history.push('/');
         
     };
@@ -82,9 +82,7 @@ function CreateTaskForm(props) {
                 
                 <Link to="/" className="btn btn-outline-secondary">Cancel</Link>
                 <CreateModal/>
-                <button onClick={props.openModal}>Change State OBJ</button>
               
-                <button onClick={props.openModalFunction}>Change State FUNC</button>
             </form>
         </div>
     );
@@ -95,12 +93,5 @@ const mapStateToProps = state => ({
     //openCreateModal: state.openCreateModal
   modal: state.modal
 });
-const mapDispatchToProps = dispatch => ({
-    addNewTask: (task) => dispatch(createCard(task)),
-    openModalFunction: () => dispatch(openModalFunction()),
-    openModal: () => dispatch({
-        type: 'OPEN_MODAL'
-    })
-});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateTaskForm));
+export default withRouter(connect(mapStateToProps, {createCard})(CreateTaskForm));

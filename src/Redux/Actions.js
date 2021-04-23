@@ -74,3 +74,9 @@ export function deleteCard (cardId) {
             });
     };
 }
+export function editFormElements(name, value) {
+    return (dispatch) => dispatch({
+        type: 'EDIT_INPUTS',
+        payload: {name, value}
+    });
+}

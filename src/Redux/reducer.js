@@ -1,5 +1,6 @@
-import {applyMiddleware, compose, createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import thunk from "redux-thunk";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 const initialState = {
     list: [],
@@ -24,11 +25,24 @@ const reducer = (state = initialState, action) => {
              return { ...state, modal: true}
         case 'CLOSE_MODAL':
              return { ...state, modal: false}
-       
+        case 'EDIT_INPUTS':
+            const {name, value} = action.payload;
+            switch (name) {
+                case 'name':
+                    return {...state, editCardValue: {...state.editCardValue, name: value}};
+                case 'description':
+                    return {...state, editCardValue: {...state.editCardValue, description: value}};
+                case 'status':
+                    return {...state, editCardValue: {...state.editCardValue, status: value}};
+                case 'priority':
+                    return {...state, editCardValue: {...state.editCardValue, priority: value}};
+                default:
+                    return state;
+            }
         default:
             return state;
     }
 }
 
-const store = createStore(reducer, compose(applyMiddleware(thunk),  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 export default store;
