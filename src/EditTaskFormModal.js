@@ -9,16 +9,18 @@ const EditTaskFormModal = (props) => {
     let history = useHistory();
     const card = useSelector(state => state.editCardValue );
     const modal = useSelector(state => state.editModal);
-    const toggle = props.toggleEditModal();
+    const button = useSelector((state => state.buttonName))
     
-    const {className, deleteCard, id, name, editCard} = props;
+    const {className, deleteCard, id, buttonName, editCard} = props;
     let leftButton, rightButton, leftButtonHandler, modalHeader;
-    if( name==='Update'){
+    console.log('NAME', button);
+   if(button==='Update'){
         modalHeader =  'Card was updated';
         leftButton = 'Back to list';
         rightButton = 'Keep editing';
         leftButtonHandler = () =>{
             editCard(id, card)
+            toggle();
             history.push('/')
         }
     }
@@ -31,17 +33,18 @@ const EditTaskFormModal = (props) => {
             toggle();
         }
     }
+    const toggle = props.toggleEditModal;
     
     return (
         <>
-            <Button outline color="secondary" onClick={toggle}>{name}</Button>
+            <Button outline color="secondary" onClick={() => toggle(buttonName)}>{buttonName}</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalHeader toggle={toggle}>{modalHeader}</ModalHeader>
                 <ModalFooter>
                     <Link to ="/">
                         <Button color="secondary" onClick={leftButtonHandler}>{leftButton}</Button>
                     </Link>
-                    <Button color="primary" onClick={toggle}>{rightButton}</Button>
+                    <Button color="primary" onClick={() => toggle(buttonName)}>{rightButton}</Button>
                 </ModalFooter>
             </Modal>
         </>

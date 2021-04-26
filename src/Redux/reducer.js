@@ -10,8 +10,9 @@ const initialState = {
         priority: '',
         status: ''
     },
-    modal: false
-  
+    editModal: false,
+    buttonName: null
+    
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,10 +22,8 @@ const reducer = (state = initialState, action) => {
             return { ...state, list: action.payload}
         case 'GET_EDIT_CARD':
              return { ...state, editCardValue: action.payload}
-        case 'OPEN_MODAL':
-             return { ...state, modal: true}
-        case 'CLOSE_MODAL':
-             return { ...state, modal: false}
+        case 'TOGGLE_EDIT_MODAL':
+            return {...state, editModal: !state.editModal, buttonName: action.payload};
         case 'EDIT_INPUTS':
             const {name, value} = action.payload;
             switch (name) {

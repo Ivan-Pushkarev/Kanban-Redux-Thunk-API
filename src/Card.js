@@ -4,7 +4,6 @@ import { withRouter } from 'react-router'
 import { Link } from "react-router-dom";
 import {connect, useSelector} from 'react-redux';
 import {deleteCard, editCard} from "./Redux/Actions";
-import DeleteModal from './EditTaskFormModal';
 
 
 const currentStatus = ['to do','progress','review','done'];
@@ -45,7 +44,7 @@ function Card(props) {
                                 {
                                     props.status !== 'done'? <button type="button" className="btn btn-outline-secondary"
                                                                      onClick={() => rightButtonHandler(el._id)}>{rightButton}⇨</button> :
-                                        <DeleteModal type="button" className="btn btn-outline-secondary" id={el._id}/>
+                                       null
                                        
                                 }
                                 

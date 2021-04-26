@@ -56,9 +56,9 @@ function EditTask(props) {
                         </select>
                     </div>
                 </div>
-                <EditTaskFormModal id={props.match.params.cardId} name='Update'/>
+                <EditTaskFormModal id={props.match.params.cardId} buttonName={'Update'}/>
                 <Link to ="/" className="btn btn-outline-secondary" >Cancel</Link>
-                <EditTaskFormModal id={props.match.params.cardId} name='Delete Task'/>
+                <EditTaskFormModal id={props.match.params.cardId} buttonName={'Delete Task'}/>
             </form>
         </div>
     

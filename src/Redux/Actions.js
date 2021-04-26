@@ -23,10 +23,11 @@ export function openModalFunction () {
         });
     };
 }
-export function toggleEditModal() {
+export function toggleEditModal(buttonName) {
     return (dispatch) => {
         dispatch({
-            type: 'TOGGLE_EDIT_MODAL'
+            type: 'TOGGLE_EDIT_MODAL',
+            payload: buttonName
         });
     };
 }
@@ -48,8 +49,7 @@ export function createCard (task) {
     return (dispatch) => {
         axios.post('https://nazarov-kanban-server.herokuapp.com/card', task)
             .then(()=> {
-                dispatch(openModalFunction());
-                dispatch(getCards());
+               dispatch(getCards());
             });
     };
 }
